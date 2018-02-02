@@ -1,4 +1,8 @@
-class RomanNumerable
+module BookKeeping
+  VERSION = 2
+end
+
+class Integer
 
 NEW_DIVIDERS = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
 NEW_CHAR = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
