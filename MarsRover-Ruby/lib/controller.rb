@@ -6,6 +6,7 @@ require "pry-byebug"
 class Controller
 
   def initialize
+    # Create an instance of View, this way you can access the view and his methods
     @view = View.new
   end
 
@@ -14,8 +15,11 @@ class Controller
     puts "Welcome to Mars Rover!"
     puts "         --           "
 
-    # Get data
+    # Get all data from user
     map = get_map
+
+    # For each rover, in this case 2, we will ask the user for rover initial position
+    # Instructions for the rover
     2.times do
        rover = rover_initial_position
        instructions = get_instructions
@@ -24,7 +28,7 @@ class Controller
     end
 
     rovers.each do |rover|
-      rover.inside_plateu?(map.max_x, map.max_y) ? output_in(rover) : output_out(rover)
+      rover.inside_plateu?(map.max_x, map.max_y) ? @view.output_in(rover) : @view.output_out(rover)
     end
   end
 
@@ -35,32 +39,20 @@ class Controller
   # All user input and output is controlled by the view
   def get_map
     map = @view.ask_user_for_map_input
-    max_x = map.split[0].to_i
-    max_y = map.split[1].to_i
-    Map.new(max_x, max_y)
+    Map.new(map.split[0].to_i, map.split[1].to_i)
   end
 
   # For each rover a Rover instance is created with position x, y and the correct orientation
   def rover_initial_position
     rover = @view.ask_user_for_rover_position
-    x = rover.split[0].to_i
-    y = rover.split[1].to_i
-    orientation = rover.split[2]
-    Rover.new(x, y, orientation)
+    Rover.new(rover.split[0].to_i, rover.split[1].to_i, rover.split[2])
   end
 
-
+  # Ask user for instructions
   def get_instructions
     instructions = @view.ask_user_for_instructions
   end
 
-  def output_in(rover)
-    @view.output_in(rover)
-  end
-
-  def output_out(rover)
-    @view.output_out(rover)
-  end
 end
 
 
