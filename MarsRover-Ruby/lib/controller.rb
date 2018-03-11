@@ -20,13 +20,12 @@ class Controller
        rover = rover_initial_position
        instructions = get_instructions
        rover.receives_instructions(instructions)
-       rovers << [rover, instructions]
+       rovers << rover
     end
-    rovers
 
-
-
-
+    rovers.each do |rover|
+      rover.inside_plateu?(map.max_x, map.max_y) ? output_in(rover) : output_out(rover)
+    end
   end
 
 
@@ -55,6 +54,13 @@ class Controller
     instructions = @view.ask_user_for_instructions
   end
 
+  def output_in(rover)
+    @view.output_in(rover)
+  end
+
+  def output_out(rover)
+    @view.output_out(rover)
+  end
 end
 
 

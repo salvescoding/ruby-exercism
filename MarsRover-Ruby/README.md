@@ -31,4 +31,6 @@ Expected Output:
 
 -------------------------------------------------------------------------------
 
-To run the program, just launch app.rb with ruby.
+To run the program on your terminal, just launch ruby controller.rb on lib
+
+To run the tests just run ruby mars_rover_test.rb on spec
