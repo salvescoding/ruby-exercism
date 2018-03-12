@@ -50,7 +50,7 @@ class Controller
 
   # Ask user for instructions
   def get_instructions
-    instructions = @view.ask_user_for_instructions
+    @view.ask_user_for_instructions
   end
 
 end

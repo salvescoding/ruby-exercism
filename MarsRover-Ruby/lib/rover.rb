@@ -58,7 +58,7 @@ COMPASS = [:N, :E, :S, :W].freeze
 
   # Rover turn right 90 degrees, using N E S W as clockwise rotation
   def turn_right
-    @orientation == COMPASS.size - 1 ? @orientation = 0 : @orientation += 1
+    @orientation == 3 ? @orientation = 0 : @orientation += 1
   end
 
 end

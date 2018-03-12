@@ -14,7 +14,7 @@ class View
   end
 
   def ask_user_for_rover_position
-    puts "Please introduce the current position of the rover"
+    puts "Please introduce the initial position of the rover"
     print "> "
     input = gets.chomp
     until !(input.to_s.chomp.empty?) && (input =~ /(\d+)\s+(\d+)\s+([NESW])/i)
