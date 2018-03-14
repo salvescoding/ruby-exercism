@@ -12,7 +12,7 @@ COMPASS = [:N, :E, :S, :W].freeze
 
   def receives_instructions(instructions)
     instructions.split("").each do |c|
-      run_instructions(c.to_sym)
+      run_instruction(c.to_sym)
     end
   end
 
@@ -29,34 +29,50 @@ COMPASS = [:N, :E, :S, :W].freeze
   private
 
   ACTIONS = {
-    m: :move_forward,
     l: :turn_left,
     r: :turn_right
   }.freeze
 
+  MOVE = {
+    N: :move_north,
+    E: :move_east,
+    S: :move_south,
+    W: :move_west
+  }.freeze
+
   # Run the instructions and send each instruction
   # to the method that corresponds
-  def run_instructions(instruction)
-    send(ACTIONS[instruction])
+  def run_instruction(instruction)
+    direction = COMPASS[@orientation]
+    instruction == :m ? send(MOVE[direction]) : send(ACTIONS[instruction])
   end
 
-  # Rover moves forward and updates the x and y coordinates depending
-  # where the rover is oriented
-  def move_forward
-    case COMPASS[@orientation]
-    when :N then @y += 1
-    when :E then @x += 1
-    when :S then @y -= 1
-    when :W then @x -= 1
-    end
+  # Moves 1 square North
+  def move_north
+    @y += 1
   end
 
-  # Rover turn left 90 degrees, using N E S W as counterclockwise rotation
+  # Moves 1 square East
+  def move_east
+    @x += 1
+  end
+
+  # Moves 1 square South
+  def move_south
+    @y -= 1
+  end
+
+  # Moves 1 square West
+  def move_west
+    @x -= 1
+  end
+
+  # Rover turn left 90 degrees
   def turn_left
     @orientation == -4 ? @orientation = -1 : @orientation -= 1
   end
 
-  # Rover turn right 90 degrees, using N E S W as clockwise rotation
+  # Rover turn right 90 degrees
   def turn_right
     @orientation == 3 ? @orientation = 0 : @orientation += 1
   end
