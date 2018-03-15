@@ -1,15 +1,15 @@
-
-
 class Bob
-
-  def self.hey(remark)
-    regex = /^[0-9a-zA-Z]*$/
-    case remark
-    when remark.end_with?("?") then "Sure."
-    when remark.upcase then "Whoa, chill out!"
-    when regex.match(remark) then "Fine. Be that way!"
-    else "Whatever."
-    end
+  def self.hey(str)
+    str = str.strip
+    return 'Fine. Be that way!' if str =~ /\A\s*\z/
+    return 'Whoa, chill out!'   if str !~ /[a-z]/
+    return 'Sure.'              if str =~ /\?\z/
+    'Whatever.'
   end
+end
 
+
+
+module BookKeeping
+    VERSION = 1
 end
