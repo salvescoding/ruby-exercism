@@ -1,8 +1,8 @@
 class Map
-  attr_reader :max_x, :max_y
+  attr_reader :x, :y
 
-  def initialize(max_x, max_y)
-    @max_x = max_x
-    @max_y = max_y
+  def initialize(x, y)
+    @x = x
+    @y = y
   end
 end
