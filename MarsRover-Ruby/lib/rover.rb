@@ -29,8 +29,8 @@ COMPASS = [:N, :E, :S, :W].freeze
   private
 
   ROTATE = {
-    l: :turn_left,
-    r: :turn_right
+    L: :turn_left,
+    R: :turn_right
   }.freeze
 
   MOVE = {
@@ -44,7 +44,7 @@ COMPASS = [:N, :E, :S, :W].freeze
   # to the method that corresponds
   def run_instruction(instruction)
     direction = COMPASS[@orientation]
-    instruction == :m ? send(MOVE[direction]) : send(ROTATE[instruction])
+    instruction == :M ? send(MOVE[direction]) : send(ROTATE[instruction])
   end
 
   # Moves 1 square North

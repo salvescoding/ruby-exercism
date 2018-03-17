@@ -40,7 +40,7 @@ won't start to move until the first one has finished moving.
 The output for each rover should be its final co-ordinates and heading.
 
 
--- INPUT AND OUTPUT EXAMPLE
+-- Input and Output example:
 
 Test Input:
 

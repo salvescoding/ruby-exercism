@@ -2,27 +2,47 @@ require_relative 'map'
 require_relative 'rover'
 require 'pry-byebug'
 
-
 class Controller
 
-  def self.run
-    rovers = Array.new
+  def initialize
+    @input = []
+    @rovers = []
+    @instructions = []
+    @map = []
+  end
 
-    # Get map width and height
-    map = get_map
+  def read_file(input)
+    File.open(input).each do |row|
+      @input << row.chomp
+    end
+  end
 
-    # For each rover, we will ask the user for rover initial position
-    # Instructions for the rover
-    begin
-       rover = rover_initial_position
-       instructions = get_instructions
-       rover.receives_instructions(instructions)
-       rovers << rover if rover
-    end while rover
+  def create_map
+    raise ArgumentError.new("Invalid map coordinates") if get_map_size == ''
+    map = get_map_size.join("")
+    @map = Map.new(map.split(" ")[0].to_i, map.split(" ")[1].to_i)
+  end
 
+  def create_rovers
+    raise ArgumentError.new("Invalid rovers coordinates") if get_rovers_initial_position == []
+    rovers = get_rovers_initial_position
+    landing(rovers)
+  end
 
-    rovers.each do |rover|
-      puts "Rover went out of the plateu!!!" if !rover.inside_plateu?(map.x, map.y)
+  def get_instructions
+    raise ArgumentError.new("Invalid instructions") if get_rover_instructions == []
+    @instructions = get_rover_instructions
+  end
+
+  def move_rovers
+    @rovers.each_with_index do |rover, index|
+      rover.receives_instructions(@instructions[index])
+    end
+  end
+
+  def output
+    @rovers.each do |rover|
+      puts "Rover went out of the plateu!!!" unless rover.inside_plateu?(@map.x, @map.y)
       puts '%d %d %s' %rover.position
     end
   end
@@ -30,33 +50,31 @@ class Controller
 
   private
 
-  # Returns a Map instance with x and y
-  # All user input and output is controlled by the view
-  def self.get_map
-    until (input = gets.chomp) && (input =~ /(\d+)\s+(\d+)/)
-      return nil if input.empty?
-      puts "Invalid input, please introduce the correct input"
+  # It finds inside the txt file we parse the values to set the map
+  def get_map_size
+    @input.select do |line|
+      line.match(/[0-9]\s[0-9]$/)
     end
-    Map.new($1.to_i, $2.to_i)
   end
 
-  # For each rover a Rover instance is created with position x, y and the correct orientation
-  def self.rover_initial_position
-    until (input = gets.chomp) && (input =~ /(\d+)\s+(\d+)\s+([NESW])/i)
-      return nil if input.empty?
-      puts "Invalid input, please introduce the correct input"
+  def get_rovers_initial_position
+    @input.select do |line|
+      line.match(/[0-9]\s[0-9]\s[NSEW]$/)
     end
-    rov = Rover.new($1.to_i, $2.to_i, $3.upcase)
   end
 
-  # Ask user for instructions
-  def self.get_instructions
-    until (input = gets.chomp) && (input =~ /([RLM]+)/i)
-      return nil if input.empty?
-      puts "Invalid input, please introduce the correct input"
+  def get_rover_instructions
+    @input.select do |line|
+      line.match(/^[LMR]+$/)
     end
-    $1.downcase
   end
+
+  def landing(rovers)
+    rovers.each do |rover|
+      @rovers << Rover.new(rover.split(" ")[0].to_i, rover.split(" ")[1].to_i, rover.split(" ")[2].upcase)
+    end
+  end
+
 
 end
 
