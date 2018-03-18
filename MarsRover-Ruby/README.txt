@@ -1,4 +1,4 @@
--- MARS ROVER --
+-- MARS ROVER KATA EXERCISE --
 
 A squad of robotic rovers are to be landed by NASA on a plateau on Mars. This
 plateau, which is curiously rectangular, must be navigated by the rovers so
@@ -55,3 +55,37 @@ Expected Output:
 
   1 3 N
   5 1 E
+
+
+  ## How to run
+
+  1 - Unzip the file MarsroverRubySA.zip
+
+  2 - Using the terminal, please access the directory that has been created 'MarsroverRubySA'
+
+  3 - To run the application you will just need to be on the directory that was created
+      and run $ ruby app.rb
+
+      Please notice to run this application, I am using an input file(.txt), which is stored under
+      the directory input_file
+      This file already contain the Test Input that was provided in the exercise.
+
+      You are welcome to change the input, and this way you will see different outputs, however
+      if you do, please set the map size in the first line, and then group the Rover position,
+      followed by the rover instructions in the next line:
+
+      5 5        -> Map size
+      1 2 N      -> Rover initial coordinates and orientation
+      LMLMLMLMM  -> Rover instructions with L, M and R
+      3 3 E      -> 2nd Rover initial coordinates
+      MMRMMRMRRM -> 2nd Rover instructions
+
+      You can introduce one or multiple rovers in the input file.
+
+  4 - To run the tests, you will need to be on the MarsroverRubySA directory and run
+      ruby spec/mars_rover_test.rb
+
+
+
+
+
