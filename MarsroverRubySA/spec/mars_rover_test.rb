@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '../lib'))
 require 'test/unit'
 require 'rover'
 require 'map'
-require 'controller'
+
 
 class TestRover < Test::Unit::TestCase
 
@@ -124,27 +124,14 @@ class TestRover < Test::Unit::TestCase
   end
 
   # Test if rover exits plateu
-  def test_inside_plateu
+  def test_inside_plateu?
     rover = Rover.new(1, 2, 'N')
     rover.receives_instructions("RRMRRMMM")
     assert_equal(rover.inside_plateu?(5, 5), true)
-  end
 
-  def test_outside_plateu
     rover = Rover.new(1, 2, 'N')
     rover.receives_instructions("RRMMMM")
     assert_equal(rover.inside_plateu?(5, 5), false)
   end
-
-  # TEST CONTROLLER METHODS
-
-  def test_extract_values_from_inputfile
-    controller = Controller.new
-    input = ["5 5", "1 2 N", "LMLMLMLMM", "3 3 E", "MMRMMRMRRM"]
-
-    # Test extract map x and y values
-    controller
-  end
-
 
 end

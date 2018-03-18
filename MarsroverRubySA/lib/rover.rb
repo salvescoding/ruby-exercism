@@ -9,14 +9,15 @@ COMPASS = [:N, :E, :S, :W].freeze
      @x, @y, @orientation = x, y, COMPASS.find_index(orientation.to_sym)
   end
 
-
+  # Receives a string of instructions "LMLMLMLMM" and send each instruction to run instruction method
+  # as a symbol
   def receives_instructions(instructions)
     instructions.split("").each do |c|
       run_instruction(c.to_sym)
     end
   end
 
-  # Return boolean depending on if rover is inside the plateu
+  # Return boolean depending on if rover is inside or outside the plateu
   def inside_plateu?(x, y)
     @x.between?(0, x) && @y.between?(0, y)
   end

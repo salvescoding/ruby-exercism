@@ -19,7 +19,7 @@ means move forward one grid point, and maintain the same heading.
 Assume that the square directly North from (x, y) is (x, y+1).
 
 
-== INPUT
+== Input
 
 The first line of input is the upper-right coordinates of the plateau, the
 lower-left coordinates are assumed to be 0,0.
@@ -57,14 +57,15 @@ Expected Output:
   5 1 E
 
 
-  ## How to run
+  ## How to execute
 
   1 - Unzip the file MarsroverRubySA.zip
 
   2 - Using the terminal, please access the directory that has been created 'MarsroverRubySA'
 
   3 - To run the application you will just need to be on the directory that was created
-      and run $ ruby app.rb
+      and run:
+      $ ruby app.rb
 
       Please notice to run this application, I am using an input file(.txt), which is stored under
       the directory input_file
@@ -82,9 +83,8 @@ Expected Output:
 
       You can introduce one or multiple rovers in the input file.
 
-  4 - To run the tests, you will need to be on the MarsroverRubySA directory and run
-      ruby spec/mars_rover_test.rb
-
+  4 - To run the tests, you will need to be on the MarsroverRubySA directory and run:
+      $ ruby spec/mars_rover_test.rb
 
 
 

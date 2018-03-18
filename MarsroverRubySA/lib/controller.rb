@@ -1,6 +1,5 @@
 require_relative 'map'
 require_relative 'rover'
-require 'pry-byebug'
 
 class Controller
 
