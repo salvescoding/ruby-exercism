@@ -11,7 +11,7 @@ class Controller
     @map = []
   end
 
-  # This method will parse the file and go through every line and store it on the variable input
+  # This method will parse the file and go through every line, and store it on the array input
   def read_file(input)
     File.open(input).each do |row|
       @input << row.chomp
