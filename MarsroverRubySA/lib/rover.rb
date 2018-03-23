@@ -2,32 +2,37 @@ class Rover
 
 COMPASS = [:N, :E, :S, :W].freeze
 
-  attr_accessor :x, :y, :orientation # allow to read and write on variables
+  attr_reader :x, :y, :orientation # allow to read and write on variables
 
   # Initialize rover instance, and assign the index of "N, E, S or W" to orientation
   def initialize(x, y, orientation)
      @x, @y, @orientation = x, y, COMPASS.find_index(orientation.to_sym)
   end
 
-  # Receives a string of instructions "LMLMLMLMM" and send each instruction to run instruction method
-  # as a symbol
-  def receives_instructions(instructions)
-    instructions.split("").each do |c|
-      run_instruction(c.to_sym)
-    end
-  end
 
-  # Return boolean depending on if rover is inside or outside the plateu
-  def inside_plateu?(x, y)
-    @x.between?(0, x) && @y.between?(0, y)
-  end
+  # # Return boolean depending on if rover is inside or outside the plateu
+  # def inside_plateu?(x, y)
+  #   @x.between?(0, x) && @y.between?(0, y)
+  # end
 
   #current position of the rover
   def position
     [ @x, @y, COMPASS[@orientation].to_s ]
   end
 
+  # Receives a string of instructions "LMLMLMLMM" and send each instruction to run instruction method
+  # as a symbol
+  def receive_instructions(instructions)
+    instructions.split("").each do |c|
+      run_instructions(c.to_sym)
+    end
+  end
   private
+
+  def run_instructions(instruct)
+    direction = COMPASS[@orientation]
+    instruct == :M ? send(MOVE[direction]) : send(ROTATE[instruct])
+  end
 
   ROTATE = {
     L: :turn_left,
@@ -43,10 +48,6 @@ COMPASS = [:N, :E, :S, :W].freeze
 
   # Run the instructions and send each instruction
   # to the method that corresponds
-  def run_instruction(instruction)
-    direction = COMPASS[@orientation]
-    instruction == :M ? send(MOVE[direction]) : send(ROTATE[instruction])
-  end
 
   # Moves 1 square North
   def move_north
