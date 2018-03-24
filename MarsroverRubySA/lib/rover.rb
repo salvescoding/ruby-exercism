@@ -10,11 +10,6 @@ COMPASS = [:N, :E, :S, :W].freeze
   end
 
 
-  # # Return boolean depending on if rover is inside or outside the plateu
-  # def inside_plateu?(x, y)
-  #   @x.between?(0, x) && @y.between?(0, y)
-  # end
-
   #current position of the rover
   def position
     [ @x, @y, COMPASS[@orientation].to_s ]

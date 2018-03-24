@@ -41,15 +41,15 @@ class Controller
   def move_rovers
     @rovers.each_with_index do |rover, index|
       rover.receive_instructions(@instructions[index])
-      puts "Clash against another Rover" if @map.rovers_crash?(rover)
-      puts "Rover will exit the plateu" if !@map.rovers_exit_plateu?(rover)
+      puts "Rover number(#{index + 1}) clashed against another Rover" if @map.rovers_crash?(rover)
+      puts "Rover number(#{index + 1}) went overboard of the plateu" if !@map.rover_inside_plateu?(rover)
     end
   end
 
   # Outputs the final position of the Roverss
   def output
     @rovers.each do |rover|
-      puts '%d %d %s' %rover.position
+      puts '%d %d %s' %rover.position if @map.rover_inside_plateu?(rover)
     end
   end
 
