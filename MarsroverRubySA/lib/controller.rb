@@ -14,7 +14,7 @@ class Controller
 
   # This method will parse the file and go through every line, and store it on the array input
   def receive_input(input)
-      @input << input
+      @input = input
   end
 
 
@@ -27,8 +27,15 @@ class Controller
 
   # calls a method that returns the correct set of initial coordinates for rovers
   def rovers_position
-    rovers_position = @input.values_at(* @input.each_index.select {|i| i.odd?})
-    landing_rovers(rovers_position)
+    @input.values_at(* @input.each_index.select {|i| i.odd?})
+  end
+
+  # We create an instance of 1 or more rovers and land them in the plateu with their initial position
+  def landing_rovers(rovers)
+    rovers.each do |rover|
+      @rovers << Rover.new(rover.split(" ")[0].to_i, rover.split(" ")[1].to_i, rover.split(" ")[2].upcase)
+    end
+    @map.rovers_initial_position(@rovers)
   end
 
   def rovers_instructions
@@ -51,18 +58,6 @@ class Controller
     @rovers.each do |rover|
       puts '%d %d %s' %rover.position if @map.rover_inside_plateu?(rover)
     end
-  end
-
-
-  private
-
-
-  # We create an instance of 1 or more rovers and land them in the plateu with their initial position
-  def landing_rovers(rovers)
-    rovers.each do |rover|
-      @rovers << Rover.new(rover.split(" ")[0].to_i, rover.split(" ")[1].to_i, rover.split(" ")[2].upcase)
-    end
-    @map.rovers_initial_position(@rovers)
   end
 
 

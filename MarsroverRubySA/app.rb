@@ -7,13 +7,17 @@ require 'controller'
 # Start a new instance of controller
 controller = Controller.new
 # Import the txt file and pass it to the controller
+input = []
 File.open('./input_file/test_input.txt').each do |row|
-  controller.receive_input(row.chomp)
+  input << row.chomp
 end
+controller.receive_input(input)
 # Create the map
 controller.create_map
 # Get Rovers initial position and instructions
-controller.rovers_position
+rovers_position = controller.rovers_position
+#Land Rovers on plateu
+controller.landing_rovers(rovers_position)
 # Get Rovers instructions
 controller.rovers_instructions
 # Move the Rovers
