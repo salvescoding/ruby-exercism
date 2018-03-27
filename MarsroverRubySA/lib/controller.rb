@@ -6,7 +6,7 @@ class Controller
 
   # Initialize the controller with 4 intance variables that will hold the values from the input file
   def initialize
-    @input = []
+    @input
     @rovers = []
     @instructions
     @map = []
@@ -14,14 +14,13 @@ class Controller
 
   # This method will parse the file and go through every line, and store it on the array input
   def receive_input(input)
-      @input = input
+    @input = input
   end
 
 
   # Extracts the coordinates from input array since we know the order
   def create_map
-    map = @input[0]
-    @map = Map.new(map.split(" ")[0].to_i, map.split(" ")[1].to_i)
+    @map = Map.new(@input[0].split(" ")[0].to_i, @input[0].split(" ")[1].to_i)
   end
 
 
@@ -30,6 +29,7 @@ class Controller
     @input.values_at(* @input.each_index.select {|i| i.odd?})
   end
 
+
   # We create an instance of 1 or more rovers and land them in the plateu with their initial position
   def landing_rovers(rovers)
     rovers.each do |rover|
@@ -37,6 +37,7 @@ class Controller
     end
     @map.rovers_initial_position(@rovers)
   end
+
 
   def rovers_instructions
     @instructions = @input.values_at(* @input.each_index.select {|i| i.even?}).slice(1..@input.size)

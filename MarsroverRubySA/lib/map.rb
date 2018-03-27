@@ -13,8 +13,7 @@ class Map
 
   def rovers_crash?(rover)
     rovers = @rovers.select {|r| r != rover}
-    crash = rovers.select { |r| rover.x.eql?(r.x) && rover.y.eql?(r.y) }
-    crash != []
+    rovers.select { |r| rover.x.eql?(r.x) && rover.y.eql?(r.y) } == [] ? false : true
   end
 
   def rover_inside_plateu?(rover)
