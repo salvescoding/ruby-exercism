@@ -23,6 +23,8 @@ COMPASS = [:N, :E, :S, :W].freeze
     end
   end
 
+  private
+
   def run_instructions(instruct)
     instruct == :M ? send(MOVE[COMPASS[@orientation]]) : send(ROTATE[instruct])
   end
