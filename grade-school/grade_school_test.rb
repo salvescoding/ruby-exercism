@@ -9,7 +9,6 @@ class SchoolTest < Minitest::Test
   end
 
   def test_add_student
-    skip
     school = School.new
     assert school.add('Aimee', 2)
     expected = ['Aimee']
