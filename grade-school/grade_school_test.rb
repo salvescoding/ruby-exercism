@@ -57,6 +57,7 @@ class SchoolTest < Minitest::Test
   end
 
   def test_students_by_grade_sorted
+    skip
     school = School.new
     everyone.each do |grade|
       grade[:students].each { |student| school.add(student, grade[:grade]) }
