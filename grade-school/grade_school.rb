@@ -1,3 +1,7 @@
+module BookKeeping
+  VERSION = 3
+end
+
 class School
 
   def initialize
@@ -17,9 +21,6 @@ class School
     everyone = @school.map do |key, value|
       { grade: key, students: value.sort }
     end
-    everyone
-    # grade = @school.key(@school.values.flatten)
-    # #return [] if grade.nil?
-    # students = @school.values.flatten
+    everyone.sort_by { |hash| hash[:grade] }
   end
 end
