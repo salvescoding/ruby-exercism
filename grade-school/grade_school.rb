@@ -18,9 +18,8 @@ class School
   end
 
   def students_by_grade
-    everyone = @school.map do |key, value|
+    @school.map do |key, value|
       { grade: key, students: value.sort }
-    end
-    everyone.sort_by { |hash| hash[:grade] }
+    end.sort_by { |hash| hash[:grade] }
   end
 end
