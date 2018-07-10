@@ -6,17 +6,10 @@ class Series
 
 
   def slices(number_of_slices)
-    return @series if number_of_slices == 1
-    return raise ArgumentError.new("Too many slices") if number_of_slices > @series.size
-    result = []
-    @series.each_with_index do |element, index|
-      limit_index = index + (number_of_slices - 1)
-      if !@series[limit_index].nil?
-        element << @series[index + 1..(index + (number_of_slices - 1))].join("")
-        result << element
-      end
+    raise ArgumentError.new("Too many slices") if number_of_slices > @series.length
+    (0..@series.length - number_of_slices).map do |i|
+      @series[i, number_of_slices].join("")
     end
-    result
   end
 
 end
