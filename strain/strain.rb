@@ -1,13 +1,9 @@
 class Array
-  def keep
-    empty_array = []
-    self.each {|i| empty_array << i if yield(i) }
-    empty_array
+  def keep(&block)
+    self.select { |i| block.call(i) }
   end
 
-  def discard
-    empty_array = []
-    self.each {|i| empty_array << i if yield(i) == false }
-    empty_array
+  def discard(&block)
+    self.reject {|i| block.call(i) }
   end
 end
