@@ -2,20 +2,18 @@ class PrimeFactors
 
 
   def self.for(number)
-    return [] if number == 1
-    array_of_primes = []
-    counter = 2
-    new_number = number
-    while array_of_primes.reduce(:*) != number
-      if new_number % counter == 0
-        prime = counter
-        array_of_primes << prime
-        new_number = new_number / counter
-      else
-          counter += 1
-      end
-    end
-    array_of_primes
+    find_primes(number)
   end
 
+  def self.find_primes(number, divisor=2, factors=[])
+    while number > 1
+      if number % divisor == 0
+        factors << divisor
+        number /= divisor
+      else
+        divisor += 1
+      end
+    end
+    factors
+  end
 end
